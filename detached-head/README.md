@@ -37,7 +37,7 @@ We want to have a branch called `the-beginning` that is made from the first comm
 
 2- 
 
-`git checkout master`
+- `git checkout master`
 
 ```
 Previous HEAD position was 2b5221c A
