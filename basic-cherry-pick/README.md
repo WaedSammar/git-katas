@@ -39,6 +39,133 @@ As you can see the `feature` branch and the `master` branch have progressed with
 11. Use `cat` to view the contents of `names.txt` and `sentence.txt` look how they have changed!
 12. How many commits were added due to the cherry pick?
 
+## Solution:
+
+1-
+
+`git log --oneline --graph --all`
+```
+* 3b85b27 (feature) Commit H: Added the boring file
+* ce1efbb Commit G: Updated the original sentence file
+* 484f7b0 Commit F: Updated and added more names to the file
+* d46ee27 Commit E: Added the numbers file
+| * 90f9f84 (HEAD -> master) Commit D: Added the animals file
+| * c5424fb Commit C: Added the additional other_sentence file
+|/
+* 05346ae Commit B: Added the sentence file
+* 70ebaf1 Commit A: Added the names file
+```
+
+2-
+
+`$ cat names.txt`
+```
+Ben
+Tom
+Sally
+```
+
+3-
+
+`cat sentence.txt`
+
+`This is a lovely sentence`
+
+4-
+
+`git cherry-pick 484f7b0`
+```
+[master 74fe5fd] Commit F: Updated and added more names to the file
+ Author: git-katas trainer bot <git-katas@example.com>
+ Date: Sun Apr 13 16:47:46 2025 +0300
+ 1 file changed, 3 insertions(+)
+```
+
+5-
+
+`git log --oneline`
+```
+74fe5fd (HEAD -> master) Commit F: Updated and added more names to the file
+90f9f84 Commit D: Added the animals file
+c5424fb Commit C: Added the additional other_sentence file
+05346ae Commit B: Added the sentence file
+70ebaf1 Commit A: Added the names file
+```
+
+6-
+
+`cat names.txt`
+```
+Ben
+Tom
+Sally
+Craig
+Jodie
+Nathan
+```
+7-
+
+`git reset --hard HEAD^`
+
+`HEAD is now at 90f9f84 Commit D: Added the animals file`
+
+8-
+
+`git log --oneline --graph`
+```
+* 90f9f84 (HEAD -> master) Commit D: Added the animals file
+* c5424fb Commit C: Added the additional other_sentence file
+* 05346ae Commit B: Added the sentence file
+* 70ebaf1 Commit A: Added the names file
+```
+
+9-
+
+ `git cherry-pick 484f7b0^..ce1efbb`
+ ```
+[master f3454d2] Commit F: Updated and added more names to the file
+ Author: git-katas trainer bot <git-katas@example.com>
+ Date: Sun Apr 13 16:47:46 2025 +0300
+ 1 file changed, 3 insertions(+)
+[master f7eda9c] Commit G: Updated the original sentence file
+ Author: git-katas trainer bot <git-katas@example.com>
+ Date: Sun Apr 13 16:47:46 2025 +0300
+ 1 file changed, 1 insertion(+)
+```
+
+10-
+
+`git log --oneline --graph`
+```
+* f7eda9c (HEAD -> master) Commit G: Updated the original sentence file
+* f3454d2 Commit F: Updated and added more names to the file
+* 90f9f84 Commit D: Added the animals file
+* c5424fb Commit C: Added the additional other_sentence file
+* 05346ae Commit B: Added the sentence file
+* 70ebaf1 Commit A: Added the names file
+```
+
+11-
+
+- `cat names.txt`
+```
+Ben
+Tom
+Sally
+Craig
+Jodie
+Nathan
+```
+
+- `cat sentence.txt`
+```
+This is a lovely sentence
+Finally I think this is probably the last sentence to add
+```
+
+12- **Two commits were added to the master branch due to the cherry pick: Commit F and Commit G.**
+
+
 ## Useful Note
 
 When using range of commits with the cherry pick command, the first commit hash specified for the oldest (left side of the range) is not actually included in the cherry pick, as in that commit is excluded but all others between and including the newest commit are.
